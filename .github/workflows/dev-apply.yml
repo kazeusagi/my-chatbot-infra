@@ -4,7 +4,7 @@ on:
       - main
 
 env:
-  TARGET_DIR: terraform/env/dev
+  TARGET_DIR: ./terraform/env/dev
 
 jobs:
   apply:
@@ -17,6 +17,9 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - run: ls
+
+      - working-directory: /
+        run: ls
 
       - working-directory: ${{env.TARGET_DIR}}
         run: ls
