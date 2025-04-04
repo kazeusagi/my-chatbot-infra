@@ -5,5 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ../:/home/user/app
+      - ../:/home/node/app
+      - ../.aws:/home/node/.aws # 認証情報の保持
     tty: true

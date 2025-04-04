@@ -2,7 +2,7 @@
 	"name": "My Chatbot Infrastructure",
 	"dockerComposeFile": "./compose.yml",
 	"service": "app",
-	"workspaceFolder": "/home/user/app",
+	"workspaceFolder": "/home/node/app",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -10,8 +10,7 @@
 				"GitHub.copilot",
 				"oderwat.indent-rainbow",
 				"amazonwebservices.aws-toolkit-vscode",
-				"hashicorp.terraform",
-				"biomejs.biome"
+				"hashicorp.terraform"
 			]
 		}
 	}
