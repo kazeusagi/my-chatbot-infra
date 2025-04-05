@@ -29,7 +29,7 @@ RUN sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "aws
   && sudo unzip awscliv2.zip \
   && sudo ./aws/install
 # Amazon Q Developer for CLIのインストール
-RUN sudo curl --proto '=https' --tlsv1.2 -sSf https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb -o amazon-q.deb
+# RUN sudo curl --proto '=https' --tlsv1.2 -sSf https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb -o amazon-q.deb
 # && sudo apt install -y ./amazon-q.deb
-# AWS CDKのインストール
-RUN sudo npm install -g aws-cdk
+ENV TENV_AUTO_INSTALL=true
+RUN terraform init
