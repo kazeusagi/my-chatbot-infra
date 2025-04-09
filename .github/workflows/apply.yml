@@ -1,0 +1,26 @@
+name: Apply
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+        description: Name of the target environment.
+
+env:
+  TAG: apply
+
+jobs:
+  apply:
+    name: Apply
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    # permissions:
+    #   contents: 'read'
+    #   id-token: 'write'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: echo
+        run: echo ${{inputs.environment}}
