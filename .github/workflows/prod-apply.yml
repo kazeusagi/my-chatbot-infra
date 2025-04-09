@@ -1,7 +1,7 @@
-name: Dev Plan
+name: Prod Apply
 
 on:
-  pull_request:
+  push:
     branches:
       - not
 

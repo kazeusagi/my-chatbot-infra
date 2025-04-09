@@ -1,4 +1,4 @@
-name: Dev Plan
+name: Prod Plan
 
 on:
   pull_request:
