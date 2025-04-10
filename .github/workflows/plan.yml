@@ -28,7 +28,7 @@ jobs:
       - name: Setup AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{secrets.AWS_REGION}}
-          role-to-assume: ${{secrets.AWS_SHARED_ROLE_ARN}}
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ env.AWS_SHARED_ROLE_ARN }}
       - name: check
         run: aws s3 ls
