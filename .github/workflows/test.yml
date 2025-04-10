@@ -1,5 +1,4 @@
-# 再利用可能なワークフロー: Terraform Plan
-name: Plan-test
+name: Dev Plan
 
 on:
   pull_request:
@@ -7,23 +6,31 @@ on:
       - develop
 
 env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-  AWS_SHARED_ROLE_ARN: ${{ secrets.AWS_SHARED_ROLE_ARN }}
+  TARGET_DIR: terraform/environment/dev
 
 jobs:
   plan:
-    name: Plan
     runs-on: ubuntu-latest
     permissions:
-      id-token: "write"
-      contents: "read"
+      id-token: write
+      contents: read
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Setup AWS CLI
+
+      - name: Setup AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{ env.AWS_REGION }}
-          role-to-assume: ${{ env.AWS_SHARED_ROLE_ARN }}
-      - name: check
-        run: aws s3 ls
+          aws-region: ${{secrets.AWS_REGION}}
+          role-to-assume: ${{secrets.AWS_SHARED_ROLE_ARN}}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: ${{env.TARGET_DIR}}
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ${{env.TARGET_DIR}}
+        run: terraform plan
