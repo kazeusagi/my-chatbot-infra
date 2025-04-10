@@ -1,0 +1,17 @@
+name: Apply Prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  apply:
+    name: Plan
+    uses: ./.github/workflows/apply.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      environment: prod
+    secrets: inherit

@@ -1,0 +1,17 @@
+name: Plan Prod
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  plan:
+    name: Plan
+    uses: ./.github/workflows/plan.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      environment: prod
+    secrets: inherit

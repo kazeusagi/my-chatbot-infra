@@ -1,0 +1,17 @@
+name: Apply Dev
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  apply:
+    name: Plan
+    uses: ./.github/workflows/apply.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      environment: dev
+    secrets: inherit
