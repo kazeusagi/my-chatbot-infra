@@ -7,7 +7,7 @@ on:
 
 jobs:
   plan:
-    name: Plan
+    name: Plan Prod
     uses: ./.github/workflows/plan.yml
     permissions:
       id-token: write
