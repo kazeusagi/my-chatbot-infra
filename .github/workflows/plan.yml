@@ -23,6 +23,9 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - name: check
+        run: echo ${{ env.TEST }}
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -34,6 +37,3 @@ jobs:
 
       - name: check
         run: aws s3 ls
-
-      - name: check 2
-        run: echo ${{ env.TEST }}
