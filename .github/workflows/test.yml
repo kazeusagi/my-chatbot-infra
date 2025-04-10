@@ -1,9 +1,9 @@
 name: Dev Plan
 
 on:
-  pull_request:
+  push:
     branches:
-      - develop
+      - main
 
 env:
   TARGET_DIR: terraform/environment/dev
