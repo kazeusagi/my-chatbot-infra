@@ -3,7 +3,7 @@ name: Apply Dev
 on:
   push:
     branches:
-      - develop
+      - not
 
 jobs:
   apply:

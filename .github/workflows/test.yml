@@ -3,7 +3,7 @@ name: Dev Plan
 on:
   push:
     branches:
-      - main
+      - not
 
 env:
   TARGET_DIR: terraform/environment/dev

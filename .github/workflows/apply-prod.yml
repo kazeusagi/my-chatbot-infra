@@ -3,7 +3,7 @@ name: Apply Prod
 on:
   push:
     branches:
-      - main
+      - not
 
 jobs:
   apply:
