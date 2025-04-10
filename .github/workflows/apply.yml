@@ -1,3 +1,4 @@
+# 再利用可能なワークフロー: Terraform Apply
 name: Apply
 
 on:
@@ -6,7 +7,7 @@ on:
       environment:
         type: string
         required: true
-        description: Name of the target environment.
+        description: 対象の環境
 
 env:
   TAG: apply
@@ -17,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     # permissions:
-    #   contents: 'read'
     #   id-token: 'write'
+    #   contents: 'read'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
