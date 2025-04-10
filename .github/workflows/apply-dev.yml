@@ -7,7 +7,7 @@ on:
 
 jobs:
   apply:
-    name: Plan
+    name: Apply Dev
     uses: ./.github/workflows/apply.yml
     permissions:
       id-token: write
