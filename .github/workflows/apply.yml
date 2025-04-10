@@ -10,6 +10,7 @@ on:
         description: 対象の環境
 
 env:
+  TEST: ${{ vars.TEST }}
   TAG: apply
 
 jobs:
@@ -24,4 +25,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: echo
-        run: echo ${{inputs.environment}}
+        run: echo ${{ inputs.environment }}
+      - name: echo
+        run: echo ${{ env.TEST }}
