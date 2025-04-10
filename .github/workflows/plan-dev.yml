@@ -1,0 +1,13 @@
+name: Plan Dev
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4

@@ -1,4 +1,4 @@
-name: test-dev
+name: Apply Dev
 
 on:
   push:
@@ -6,9 +6,8 @@ on:
       - develop
 
 jobs:
-  test:
+  apply:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-        
