@@ -1,3 +1,4 @@
+# 再利用可能なワークフロー: Terraform Plan
 name: Plan
 
 on:
@@ -6,9 +7,10 @@ on:
       environment:
         type: string
         required: true
-        description: Name of the target environment.
+        description: 対象の環境
 
 env:
+  TEST: ${{ vars.TEST }}
   TAG: plan
 
 jobs:
@@ -17,10 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     # permissions:
-    #   contents: 'read'
     #   id-token: 'write'
+    #   contents: 'read'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: echo
-        run: echo ${{inputs.environment}}
+        run: echo ${{ inputs.environment }}
+      - name: echo
+        run: echo ${{ env.TEST }}
+      - name: echo
+        run: echo ${{ env.TAG }}

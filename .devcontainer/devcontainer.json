@@ -11,7 +11,8 @@
 				"oderwat.indent-rainbow",
 				"amazonwebservices.aws-toolkit-vscode",
 				"hashicorp.terraform",
-				"github.vscode-github-actions"
+				"github.vscode-github-actions",
+				"esbenp.prettier-vscode"
 			]
 		}
 	}
