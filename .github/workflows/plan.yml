@@ -11,6 +11,8 @@ on:
 
 env:
   TEST: ${{ vars.TEST }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_SHARED_ROLE_ARN: ${{ secrets.AWS_SHARED_ROLE_ARN }}
   TAG: plan
 
 jobs:
@@ -24,9 +26,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: echo
-        run: echo ${{ inputs.environment }}
-      - name: echo
-        run: echo ${{ env.TEST }}
-      - name: echo
-        run: echo ${{ env.TAG }}
+      - name: Setup AWS CLI
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_SHARED_ROLE_ARN }}
+      - name: check
+        run: aws s3 ls
