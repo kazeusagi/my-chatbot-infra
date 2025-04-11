@@ -37,3 +37,11 @@ jobs:
 
       - name: check
         run: aws s3 ls
+
+      - name: Terraform Init
+        working-directory: ${{ env.TARGET_DIR }}
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ${{ env.TARGET_DIR }}
+        run: terraform plan
