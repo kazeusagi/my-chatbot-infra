@@ -49,3 +49,14 @@ jobs:
         id: plan
         working-directory: ${{ env.TARGET_DIR }}
         run: terraform plan
+
+      - name: Setup aqua
+        uses: aquaproj/aqua-installer@v3.1.1
+        with:
+          aqua_version: v2.43.1
+
+      - name: Setup tfcmt
+        run: aqua g -i suzuki-shunsuke/tfcmt
+
+      - name: tfcmt
+        run: tfcmt -v
