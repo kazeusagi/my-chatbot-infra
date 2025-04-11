@@ -67,5 +67,7 @@ jobs:
         run: tfcmt -v
 
       - name: tfcmt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ${{ env.TARGET_DIR }}
         run: tfcmt plan -- terraform show tfplan
