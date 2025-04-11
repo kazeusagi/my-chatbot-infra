@@ -42,8 +42,22 @@ jobs:
         id: terraform-version
         run: echo "terraform-version=$(cat .terraform-version)" >> $GITHUB_OUTPUT
 
+      - name: id2
+        id: a
+        run: echo "value=a" >> $GITHUB_OUTPUT
+
+      - name: id2
+        id: i
+        run: echo "value=i" >> $GITHUB_OUTPUT
+
       - name: Test
         run: echo ${{ steps.terraform-version.outputs.terraform-version }}
+
+      - name: Test2
+        run: echo ${{ steps.a.outputs.value }}
+
+      - name: Test3
+        run: echo ${{ steps.i.outputs.value }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
