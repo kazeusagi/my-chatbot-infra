@@ -7,12 +7,12 @@ on:
       environment:
         type: string
         required: true
-        description: 対象の環境
+        description: 対象の環境(dev, stg, prod)
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   AWS_SHARED_ROLE_ARN: ${{ secrets.AWS_SHARED_ROLE_ARN }}
-  TEST: ${{ vars.TEST }}
+  TARGET_DIR: "./terraform/environment/${{ inputs.environment }}"
 
 jobs:
   plan:
@@ -23,8 +23,8 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - name: check
-        run: echo ${{ env.TEST }}
+      - name: TEST
+        run: echo ${{ env.TARGET_DIR }}
 
       - name: Checkout
         uses: actions/checkout@v4
