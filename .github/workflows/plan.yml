@@ -38,6 +38,13 @@ jobs:
       - name: check
         run: aws s3 ls
 
+      - name: Get Terraform version
+        id: terraform-version
+        run: cat .terraform-version
+
+      - name: Test
+        run: echo ${{steps.terraform-version.outputs.terraform-version}}
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
