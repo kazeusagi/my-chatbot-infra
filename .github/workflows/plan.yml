@@ -55,11 +55,14 @@ jobs:
         with:
           aqua_version: v2.43.1
 
-      - name: Init aqua
+      - name: aqua Init
         run: aqua init
 
       - name: Setup tfcmt
         run: aqua g -i suzuki-shunsuke/tfcmt
+
+      - name: aqua Install
+        run: aqua i
 
       - name: tfcmt
         run: tfcmt -v
