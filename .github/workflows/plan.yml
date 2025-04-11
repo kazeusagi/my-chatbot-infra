@@ -23,9 +23,6 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - name: TEST
-        run: echo ${{ env.TARGET_DIR }}
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -34,9 +31,6 @@ jobs:
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.AWS_SHARED_ROLE_ARN }}
-
-      - name: check
-        run: aws s3 ls
 
       - name: Get Terraform version
         id: terraform-version
@@ -52,5 +46,6 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
+        id: plan
         working-directory: ${{ env.TARGET_DIR }}
         run: terraform plan
