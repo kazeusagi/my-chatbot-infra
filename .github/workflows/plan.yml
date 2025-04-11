@@ -25,12 +25,15 @@ jobs:
     steps:
       - name: check
         run: echo ${{ env.TEST }}
+
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.AWS_SHARED_ROLE_ARN }}
+
       - name: check
         run: aws s3 ls
