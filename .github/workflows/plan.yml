@@ -46,9 +46,8 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        id: plan
         working-directory: ${{ env.TARGET_DIR }}
-        run: terraform plan
+        run: terraform plan --out=tfplan
 
       - name: Setup aqua
         uses: aquaproj/aqua-installer@v3.1.2
@@ -66,3 +65,7 @@ jobs:
 
       - name: tfcmt
         run: tfcmt -v
+
+      - name: tfcmt
+        working-directory: ${{ env.TARGET_DIR }}
+        run: tfcmt plan -- terraform show tfplan
