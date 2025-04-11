@@ -38,6 +38,9 @@ jobs:
       - name: check
         run: aws s3 ls
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Terraform Init
         working-directory: ${{ env.TARGET_DIR }}
         run: terraform init
