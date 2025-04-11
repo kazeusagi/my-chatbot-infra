@@ -23,6 +23,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
+      issues: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,17 +56,11 @@ jobs:
         with:
           aqua_version: v2.48.1
 
-      - name: aqua Init
-        run: aqua init
-
-      - name: Setup tfcmt
-        run: aqua g -i suzuki-shunsuke/tfcmt
-
-      - name: aqua Install
-        run: aqua i
-
-      - name: tfcmt
-        run: tfcmt -v
+      - name: aqua Install (tfcmt)
+        run: |
+          aqua init
+          aqua g -i suzuki-shunsuke/tfcmt
+          aqua i
 
       - name: tfcmt
         env:
