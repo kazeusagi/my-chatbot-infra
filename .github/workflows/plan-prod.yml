@@ -12,6 +12,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      pull-requests: write
     with:
       environment: prod
     secrets: inherit
