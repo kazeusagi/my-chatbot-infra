@@ -7,28 +7,64 @@ on:
       environment:
         type: string
         required: true
-        description: 対象の環境
+        description: 対象の環境(dev, stg, prod)
 
 env:
-  TEST: ${{ vars.TEST }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
   AWS_SHARED_ROLE_ARN: ${{ secrets.AWS_SHARED_ROLE_ARN }}
-  TAG: plan
+  TARGET_DIR: "./terraform/environment/${{ inputs.environment }}"
 
 jobs:
   plan:
     name: Plan
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     permissions:
-      id-token: "write"
-      contents: "read"
+      id-token: write
+      contents: read
+      pull-requests: write
+      issues: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{secrets.AWS_REGION}}
-          role-to-assume: ${{secrets.AWS_SHARED_ROLE_ARN}}
-      - name: check
-        run: aws s3 ls
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ env.AWS_SHARED_ROLE_ARN }}
+
+      - name: Get Terraform version
+        id: terraform-version
+        run: echo "value=$(cat .terraform-version)" >> $GITHUB_OUTPUT
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ steps.terraform-version.outputs.value }}
+
+      - name: Terraform Init
+        working-directory: ${{ env.TARGET_DIR }}
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ${{ env.TARGET_DIR }}
+        run: terraform plan --out=tfplan
+
+      - name: Setup aqua
+        uses: aquaproj/aqua-installer@v3.1.2
+        with:
+          aqua_version: v2.48.1
+
+      - name: aqua Install (tfcmt)
+        run: |
+          aqua init
+          aqua g -i suzuki-shunsuke/tfcmt
+          aqua i
+
+      - name: tfcmt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        working-directory: ${{ env.TARGET_DIR }}
+        run: tfcmt plan -- terraform show tfplan
