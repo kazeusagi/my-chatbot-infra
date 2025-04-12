@@ -1,5 +1,5 @@
 {
-  "name": "My Chatbot Infrastructure",
+  "name": "Terraform AWS Template",
   "dockerComposeFile": "./compose.yml",
   "service": "app",
   "workspaceFolder": "/home/user/app",
