@@ -1,3 +1,5 @@
+# シンボリックリンクで共通化しているバージョン設定
+# 編集する際は注意してください。
 terraform {
   required_version = "1.11.3"
   required_providers {
