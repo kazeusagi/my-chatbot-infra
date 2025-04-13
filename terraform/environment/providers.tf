@@ -1,16 +1,17 @@
-# シンボリックリンクで共通化しているプロバイダ設定
+# シンボリックリンクで共通化しているプロバイダ設定です。
 # 編集する際は注意してください。
+# また、localsの未定義エラーが出ることがありますが、リンク先でエラーが出ていなければ問題ありません。
 
 # Default: Sharedアカウントにアクセスする際のプロバイダ設定
 provider "aws" {
   region = "ap-northeast-1"
 }
 
-# MyChatbot-Devにアクセスする際のプロバイダ設定
+# TerraformAwsTemplate-Devにアクセスする際のプロバイダ設定
 provider "aws" {
-  alias  = "my_chatbot_dev"
+  alias  = "terraform_aws_template_dev"
   region = "ap-northeast-1"
   assume_role {
-    role_arn = local.my_chatbot_dev_role_arn
+    role_arn = data.terraform_remote_state.common_state.outputs.github_actions_oidc_role_arn
   }
 }

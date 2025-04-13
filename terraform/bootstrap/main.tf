@@ -1,5 +1,5 @@
 # 実行に必要な基礎となるリソースの作成を行う
-module "my_chatbot_dev_role" {
+module "terraform_aws_template_dev_role" {
   source     = "../modules/iam_role"
   name       = "GithubActionsOIDCRole"
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
