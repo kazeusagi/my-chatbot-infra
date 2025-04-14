@@ -4,12 +4,12 @@
 
 # Default: Sharedアカウントにアクセスする際のプロバイダ設定
 provider "aws" {
+  alias  = "shared"
   region = "ap-northeast-1"
 }
 
 # TerraformAwsTemplate-Devにアクセスする際のプロバイダ設定
 provider "aws" {
-  alias  = "terraform_aws_template_dev"
   region = "ap-northeast-1"
   assume_role {
     role_arn = data.terraform_remote_state.bootstrap.outputs.github_actions_oidc_role_arn
