@@ -17,12 +17,5 @@ fi
   export AWS_PROFILE="shared"
   cd terraform/environment/$1
   terraform init -reconfigure
-)
-
-# Plan
-(
-  # adminプロファイルで実行
-  export AWS_PROFILE="admin"
-  cd terraform/environment/$1
   terraform plan
 )

@@ -13,4 +13,7 @@ provider "aws" {
 provider "aws" {
   alias  = "shared"
   region = "ap-northeast-1"
+  assume_role {
+    role_arn = data.terraform_remote_state.shared.outputs.github_actions_oidc_role_arn
+  }
 }
