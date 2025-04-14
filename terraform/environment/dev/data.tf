@@ -5,5 +5,4 @@ data "terraform_remote_state" "bootstrap" {
     key    = "terraform-aws-template/bootstrap/terraform.tfstate"
     region = "ap-northeast-1"
   }
-  provider = aws
 }
