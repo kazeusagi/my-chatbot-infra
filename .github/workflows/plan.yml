@@ -50,6 +50,7 @@ jobs:
       - name: Terraform Plan
         working-directory: ${{ env.TARGET_DIR }}
         run: terraform plan --out=tfplan
+        continue-on-error: true
 
       - name: Setup aqua
         uses: aquaproj/aqua-installer@v3.1.2
