@@ -8,7 +8,7 @@ variable "policy_arn" {
   description = "IAMロールにアタッチするポリシーのARN"
 }
 
-variable "identifier" {
-  type        = string
+variable "allowed_assume_roles" {
+  type        = list(string)
   description = "IAMロールの信頼ポリシーに指定するAWSアカウントID"
 }

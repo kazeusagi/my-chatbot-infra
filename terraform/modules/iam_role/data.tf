@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = [var.identifier]
+      identifiers = var.allowed_assume_roles
     }
   }
 }
