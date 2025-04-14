@@ -43,15 +43,6 @@ jobs:
         with:
           terraform_version: ${{ steps.terraform-version.outputs.value }}
 
-      - name: Terraform Init
-        working-directory: ${{ env.TARGET_DIR }}
-        run: terraform init
-
-      - name: Terraform Plan
-        working-directory: ${{ env.TARGET_DIR }}
-        run: terraform plan --out=tfplan
-        continue-on-error: true
-
       - name: Setup aqua
         uses: aquaproj/aqua-installer@v3.1.2
         with:
@@ -63,9 +54,13 @@ jobs:
           aqua g -i suzuki-shunsuke/tfcmt
           aqua i
 
-      - name: tfcmt
+      - name: Terraform Init
+        working-directory: ${{ env.TARGET_DIR }}
+        run: terraform init
+
+      - name: Terraform Plan with tfcmt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         working-directory: ${{ env.TARGET_DIR }}
-        run: tfcmt plan -- terraform show tfplan
+        run: tfcmt plan -- terraform plan
