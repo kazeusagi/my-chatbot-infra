@@ -1,4 +1,4 @@
-FROM node:22-bookworm-slim
+FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y \
   curl \
@@ -9,9 +9,13 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# sudo権限付与
-ARG USER_NAME=node
-RUN echo $USER_NAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USER_NAME \
+# non-root-userの追加
+ARG USER_NAME=user
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN groupadd --gid $USER_GID $USER_NAME \
+  && useradd --gid $USER_GID --uid $USER_UID -m $USER_NAME -s /bin/bash \
+  && echo $USER_NAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USER_NAME \
   && chmod 0440 /etc/sudoers.d/$USER_NAME
 # non-root-userに切り替え
 USER $USER_NAME
@@ -28,8 +32,6 @@ RUN TENV_LATEST_VERSION=$(curl --silent https://api.github.com/repos/tofuutils/t
 RUN sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
   && sudo unzip awscliv2.zip \
   && sudo ./aws/install
-# Amazon Q Developer for CLIのインストール
-# RUN sudo curl --proto '=https' --tlsv1.2 -sSf https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb -o amazon-q.deb
-# && sudo apt install -y ./amazon-q.deb
+# Terraformの初期化
 ENV TENV_AUTO_INSTALL=true
 RUN terraform init

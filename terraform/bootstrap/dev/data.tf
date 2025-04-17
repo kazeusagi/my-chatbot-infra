@@ -4,6 +4,6 @@ data "terraform_remote_state" "shared" {
     bucket  = "kazeusagi-tfstate"
     key     = "shared/terraform.tfstate"
     region  = "ap-northeast-1"
-    profile = "shared" # AWS CLIのプロファイル名
+    profile = "shared" # AWS SSOのプロファイル名
   }
 }
