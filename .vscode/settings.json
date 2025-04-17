@@ -3,5 +3,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform"
-  }
+  },
+  "search.followSymlinks": false
 }
